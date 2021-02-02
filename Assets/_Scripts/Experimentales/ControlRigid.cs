@@ -6,19 +6,17 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody),typeof(CapsuleCollider))]
 public class ControlRigid : MonoBehaviour
 {
-    //public Camera _camera;
     public Transform TheCamera;
 
-    private Rigidbody _rigidbody;
-    [SerializeField,Header("velocidades")] float speed;
-    [SerializeField]float turnSpeed, turnTime = 0.1f;
 
-    Quaternion NewRotation = Quaternion.identity;
+    private Rigidbody _rigidbody;
+    [SerializeField,Header("Velocidades")] float speed;
+    [SerializeField]float turnSpeed, turnTime = 0.1f;
 
     private float horizontal, vertical;
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Gamestart();
         
     }
 
@@ -27,6 +25,16 @@ public class ControlRigid : MonoBehaviour
         PlayerMoveDirection();
         
     }
+    /// <summary>
+    /// Para no llenar la funcion start
+    /// </summary>
+    void Gamestart()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+
+
+    }
+
 
     /// <summary>
     /// entradas del Player
@@ -35,6 +43,7 @@ public class ControlRigid : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+
     }
 
     /// <summary>
@@ -53,8 +62,7 @@ public class ControlRigid : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, angle, 0);
             Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
 
-            _rigidbody.AddForce(moveDirection * speed * Time.fixedDeltaTime);
-
+            _rigidbody.AddForce(moveDirection * speed * Time.fixedDeltaTime, ForceMode.Force);
         }
     }
 }

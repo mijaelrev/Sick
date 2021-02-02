@@ -32,9 +32,6 @@ public class PlayerController : MonoBehaviour
         Movement();
     }
 
-    /// <summary>
-    /// Entradas de movimiento del Player
-    /// </summary>
     void Movement()
     {
 
@@ -52,9 +49,6 @@ public class PlayerController : MonoBehaviour
         character.Move(direction * Time.deltaTime * speed);
     }
 
-    /// <summary>
-    /// El player se movera en direccion a donde vea la camara
-    /// </summary>
     void camDirection()
     {
         camForward = camara.transform.forward;
@@ -67,9 +61,6 @@ public class PlayerController : MonoBehaviour
         camRight = camRight.normalized;
     }
 
-    /// <summary>
-    /// Es la gravedad, cuando el Player no se mueve en el eje Y la gravedad es 0
-    /// </summary>
     void Gravity()
     {
         if (character.isGrounded != true) fallVelocity -= gravityForce * Time.deltaTime;
