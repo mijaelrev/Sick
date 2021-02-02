@@ -7,6 +7,26 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Ceiling_material
+    second: {fileID: 2100000, guid: ff657c512452a3f45815a1fb6ee93917, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Column_material
+    second: {fileID: 2100000, guid: 9431431f400f99e4e8d51432955ba845, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Column_rect
+    second: {fileID: 2100000, guid: 2c126372c7c81284195194593902f625, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_material
+    second: {fileID: 2100000, guid: 6b3a3f513e85cd94c8cf72c180bff7c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material
     second: {fileID: 2100000, guid: 418e6a7eea62ca24fa51e1deeaee5133, type: 2}
   - first:
@@ -39,6 +59,31 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material.006
     second: {fileID: 2100000, guid: a986eab3d4336e44395cacee0440a5f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Stair
+    second: {fileID: 2100000, guid: 5326f97092942de4ba5d0e42a85f0b3d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StairB
+    second: {fileID: 2100000, guid: c93a154f7856a294494261c2be8b07d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_material
+    second: {fileID: 2100000, guid: ac8de0d0a773ae446b7529576da9f4a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: iron
+    second: {fileID: 2100000, guid: 8b4e5ea0ec976d54187dbbfd4ee60319, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tuve
+    second: {fileID: 2100000, guid: 1ca5d3581f9ead848b3c0bf798575332, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

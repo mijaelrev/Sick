@@ -2,26 +2,79 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider))]
+[RequireComponent(typeof(CharacterController), typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour
 {
     public static bool playerCreated;
-    Rigidbody _rigidbody;
-    [SerializeField]float speed = 5f;
+
+    CharacterController character;
+    [SerializeField] float speed = 5f;
+    Vector3 playerInput;
+
+    Camera camara;
+    Vector3 camForward;
+    Vector3 camRight;
+
+    [SerializeField] float gravityForce;
+    float fallVelocity;
+
+    Vector3 direction;
+
     private void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        character = GetComponent<CharacterController>();
         playerCreated = true;
+        camara = Camera.main;
     }
 
     void Update()
     {
-        float keyBoard_H = Input.GetAxis("Horizontal") * speed;
-        float keyBoard_V = Input.GetAxis("Vertical") * speed;
+        Movement();
     }
-    void FixedUpdate()
+
+    /// <summary>
+    /// Entradas de movimiento del Player
+    /// </summary>
+    void Movement()
     {
-        
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        move = Vector3.ClampMagnitude(move, 1);
+
+        camDirection();
+
+        direction = move.x * camRight + move.z * camForward;
+
+        Gravity();
+
+        direction.y += fallVelocity;
+
+        character.Move(direction * Time.deltaTime * speed);
     }
+
+    /// <summary>
+    /// El player se movera en direccion a donde vea la camara
+    /// </summary>
+    void camDirection()
+    {
+        camForward = camara.transform.forward;
+        camRight = camara.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+    }
+
+    /// <summary>
+    /// Es la gravedad, cuando el Player no se mueve en el eje Y la gravedad es 0
+    /// </summary>
+    void Gravity()
+    {
+        if (character.isGrounded != true) fallVelocity -= gravityForce * Time.deltaTime;
+        if (character.isGrounded) fallVelocity = 0;
+    }
+
 
 }
