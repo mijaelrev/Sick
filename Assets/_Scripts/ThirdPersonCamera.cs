@@ -4,34 +4,109 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform Target;
-    public Transform TheCamera;
-    public float sensibilityX = 2f, sensibilityY = 2f;
+    [SerializeField] float sens;//sensivilidad
 
-    [SerializeField]float distance = 3.5f;
+    [SerializeField] Transform target;
 
-    private Camera _Camera;
-    private float mouseX, mouseY;
-    private const float maxRotation = 80f, minRotation = -80;
+    Vector3 mouseDelta = Vector3.zero;
+    Vector3 amount = Vector3.zero;
+
+    [SerializeField] Vector3 addPos;
+
+    RaycastHit hit;
+    [SerializeField] float hitDistances;
+
+    float tanFOV;
+
+    Camera camera;
+    Vector3 lookAt = Vector3.zero;
+
+    Vector3 cameraPos = Vector3.zero;
+    Vector3 cameraPosOcc = Vector3.zero;
+    Quaternion cameraRot = Quaternion.identity;
+
+    Vector3 screenCenter = Vector3.zero;
+    Vector3 up = Vector3.zero;
+    Vector3 right = Vector3.zero;
+
+    Vector3[] corners = new Vector3[5];
 
     void Start()
     {
-        TheCamera = transform;
-        _Camera = Camera.main;
+        camera = Camera.main;
+
+        float HalfFOV = camera.fieldOfView * 0.5f * Mathf.Deg2Rad;
+
+        tanFOV = Mathf.Tan(HalfFOV) * camera.nearClipPlane;
     }
 
     void Update()
     {
-        mouseX += Input.GetAxis("Mouse X");
-        mouseY += Input.GetAxis("Mouse Y") * sensibilityX;
-        mouseY= Mathf.Clamp(mouseY, minRotation, maxRotation);
+        screenCenter = (cameraRot * Vector3.forward) * camera.nearClipPlane;
+        up = (cameraRot * Vector3.up) * tanFOV;
+        right = (cameraRot * Vector3.right) * tanFOV * camera.aspect;
+
+        corners[0] = cameraPos + screenCenter - up - right;
+        corners[1] = cameraPos + screenCenter + up - right;
+        corners[2] = cameraPos + screenCenter + up + right;
+        corners[3] = cameraPos + screenCenter - up + right;
+        corners[4] = cameraPos + screenCenter;
+
+        hitDistances = 100000;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (Physics.Linecast(target.transform.position + addPos, corners[i], out hit))
+            {
+                Debug.DrawLine(target.transform.position + addPos, corners[i], Color.red);
+
+                Debug.DrawRay(hit.point, Vector3.up * 0.5f, Color.green);
+
+                hitDistances = Mathf.Min(hitDistances, hit.distance);
+            }
+            else Debug.DrawLine(target.transform.position + addPos, corners[i], Color.blue);
+        }
+
+        if(hitDistances > 9999)
+        {
+            hitDistances = 0;
+        }
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        Vector3 direction = new Vector3(0, 0, distance);
-        Quaternion rotation = Quaternion.Euler(mouseY, mouseX, 0);
-        TheCamera.position = Target.position + rotation * direction;
-        TheCamera.LookAt(Target.position);
+
+        mouseDelta.Set(Input.GetAxisRaw("Mouse X"),
+            Input.GetAxisRaw("Mouse Y"),
+            Input.GetAxisRaw("Mouse ScrollWheel"));
+
+        amount += -mouseDelta * sens;
+        amount.z = Mathf.Clamp(amount.z , 50, 100);
+        amount.y = Mathf.Clamp(amount.y , 10, 89);
+
+        cameraRot = Quaternion.AngleAxis(-amount.x, Vector3.up) * 
+            Quaternion.AngleAxis(amount.y, Vector3.right);
+
+        lookAt = cameraRot * Vector3.forward;
+
+        cameraPos = target.transform.position + addPos - lookAt * amount.z * 0.1f;
+
+        cameraPosOcc = target.transform.position + addPos - lookAt * hitDistances;
+
+        if (hitDistances < camera.nearClipPlane * 2.5f)
+        {
+            cameraPosOcc -= lookAt * camera.nearClipPlane;
+        }
+
+        camera.transform.rotation = cameraRot;
+
+        if(hitDistances > 0)
+        {
+            camera.transform.position = cameraPosOcc;
+        }
+        else
+        {
+            camera.transform.position = cameraPos;
+        }
     }
 }
