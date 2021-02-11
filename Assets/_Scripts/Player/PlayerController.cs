@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
-[RequireComponent(typeof(CharacterController), typeof(CapsuleCollider))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     public static bool playerCreated;
 
     CharacterController character;
     [SerializeField] float speed = 5f;
-    Vector3 playerInput;
 
     Camera camara;
     Vector3 camForward;
@@ -66,6 +66,4 @@ public class PlayerController : MonoBehaviour
         if (character.isGrounded != true) fallVelocity -= gravityForce * Time.deltaTime;
         if (character.isGrounded) fallVelocity = 0;
     }
-
-
 }
