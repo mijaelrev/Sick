@@ -18,7 +18,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     float tanFOV;
 
-    Camera camera;
+    Camera _camera;
     Vector3 lookAt = Vector3.zero;
 
     Vector3 cameraPos = Vector3.zero;
@@ -33,18 +33,18 @@ public class ThirdPersonCamera : MonoBehaviour
 
     void Start()
     {
-        camera = Camera.main;
+        _camera = Camera.main;
 
-        float HalfFOV = camera.fieldOfView * 0.5f * Mathf.Deg2Rad;
+        float HalfFOV = _camera.fieldOfView * 0.5f * Mathf.Deg2Rad;
 
-        tanFOV = Mathf.Tan(HalfFOV) * camera.nearClipPlane;
+        tanFOV = Mathf.Tan(HalfFOV) * _camera.nearClipPlane;
     }
 
     void Update()
     {
-        screenCenter = (cameraRot * Vector3.forward) * camera.nearClipPlane;
+        screenCenter = (cameraRot * Vector3.forward) * _camera.nearClipPlane;
         up = (cameraRot * Vector3.up) * tanFOV;
-        right = (cameraRot * Vector3.right) * tanFOV * camera.aspect;
+        right = (cameraRot * Vector3.right) * tanFOV * _camera.aspect;
 
         corners[0] = cameraPos + screenCenter - up - right;
         corners[1] = cameraPos + screenCenter + up - right;
@@ -93,20 +93,20 @@ public class ThirdPersonCamera : MonoBehaviour
 
         cameraPosOcc = target.transform.position + addPos - lookAt * hitDistances;
 
-        if (hitDistances < camera.nearClipPlane * 2.5f)
+        if (hitDistances < _camera.nearClipPlane * 2.5f)
         {
-            cameraPosOcc -= lookAt * camera.nearClipPlane;
+            cameraPosOcc -= lookAt * _camera.nearClipPlane;
         }
 
-        camera.transform.rotation = cameraRot;
+        _camera.transform.rotation = cameraRot;
 
         if(hitDistances > 0)
         {
-            camera.transform.position = cameraPosOcc;
+            _camera.transform.position = cameraPosOcc;
         }
         else
         {
-            camera.transform.position = cameraPos;
+            _camera.transform.position = cameraPos;
         }
     }
 }
