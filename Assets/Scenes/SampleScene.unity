@@ -722,10 +722,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0649960c67fa9543ab430ffff3d8b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 0
-  target: {fileID: 1480563653}
-  addPos: {x: 0, y: 0, z: 0}
-  hitDistances: 0
+  Target: {fileID: 0}
+  TheCamera: {fileID: 963194228}
+  sensibilityX: 2
+  sensibilityY: 2
+  distance: 2.5
 --- !u!1 &992682231
 GameObject:
   m_ObjectHideFlags: 0
