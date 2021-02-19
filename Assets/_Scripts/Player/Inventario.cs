@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Test : MonoBehaviour
+public class Inventario : MonoBehaviour
 {
     [SerializeField] GameObject inventBar;//barra de inventario
-    [SerializeField] GameObject[] inventSpace;
-    [SerializeField] List<GameObject> toTake;
+    GameObject[] inventSpace;
+    LinkedList<GameObject> toTake = new LinkedList<GameObject>();
 
     [SerializeField] Transform hand;
 
     int selecion = 0;
-
-    int freeSpace = 1;//espacio libre mas cercano al cero
 
     // Start is called before the first frame update
     void Start()
@@ -40,18 +38,18 @@ public class Test : MonoBehaviour
         {
             if (toTake.Count > 0)
             {
-                if (toTake[0].GetComponent<TakingItem>().itemType == TakingItem.Type.Weapon)
+                if (toTake.First.Value.GetComponent<TakingItem>().itemType == TakingItem.Type.Weapon)
                 {
                     for (int i = 0; i < inventSpace.Length; i++)
                     {
                         if (inventSpace[i].GetComponent<Espacio>().tipo == Espacio.type.libre)
                         {
-                            inventSpace[i].GetComponent<Espacio>().item = Coger(toTake[0].GetComponent<TakingItem>().coger);
+                            inventSpace[i].GetComponent<Espacio>().item = Coger(toTake.First.Value.GetComponent<TakingItem>().coger);
                             inventSpace[i].GetComponent<Espacio>().item.transform.SetParent(hand);
                             inventSpace[i].GetComponent<Espacio>().item.transform.position = hand.transform.position;
 
-                            Destroy(toTake[0]);
-                            toTake.RemoveAt(0);
+                            Destroy(toTake.First.Value);
+                            toTake.RemoveFirst();
                             break;
                         }
                         else if (inventSpace[selecion].GetComponent<Espacio>().item != null && selecion != 0)
@@ -59,12 +57,12 @@ public class Test : MonoBehaviour
                             Soltar(inventSpace[selecion].GetComponent<Espacio>().item.GetComponent<Item>().soltar, 
                                 inventSpace[selecion].GetComponent<Espacio>().item);
 
-                            inventSpace[selecion].GetComponent<Espacio>().item = Coger(toTake[0].GetComponent<TakingItem>().coger);
+                            inventSpace[selecion].GetComponent<Espacio>().item = Coger(toTake.First.Value.GetComponent<TakingItem>().coger);
                             inventSpace[selecion].GetComponent<Espacio>().item.transform.SetParent(hand);
                             inventSpace[selecion].GetComponent<Espacio>().item.transform.position = hand.transform.position;
 
-                            Destroy(toTake[0]);
-                            toTake.RemoveAt(0);
+                            Destroy(toTake.First.Value);
+                            toTake.RemoveFirst();
                             break;
                         }
                     }
@@ -109,19 +107,7 @@ public class Test : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider coll)
-    {
-        if (coll.gameObject.tag == "Object")
-        {
-            toTake.Add(coll.gameObject);
-        }
-    }
+    public void ToTakeAdd(GameObject objeto) => toTake.AddLast(objeto);
 
-    private void OnTriggerExit(Collider coll)
-    {
-        if (coll.gameObject.tag == "Object")
-        {
-            toTake.Remove(coll.gameObject);
-        }
-    }
+    public void ToTakeRemove(GameObject objeto) => toTake.Remove(objeto);
 }
