@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2923,7 +2923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipo: 0
-  animator: {fileID: 0}
+  animator: {fileID: 1340625295}
   animacion: {fileID: 7400000, guid: 7d7979bc856ba464fbb6c442671cd833, type: 2}
   ColliderRight: {fileID: 1577475406}
   ColliderLeft: {fileID: 221986386}
