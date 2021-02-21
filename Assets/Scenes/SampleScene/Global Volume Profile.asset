@@ -12,18 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   mode:
     m_OverrideState: 1
     m_Value: 1
   gaussianStart:
     m_OverrideState: 1
-    m_Value: 15
+    m_Value: 30
     min: 0
   gaussianEnd:
     m_OverrideState: 1
-    m_Value: 30
+    m_Value: 50
     min: 0
   gaussianMaxRadius:
     m_OverrideState: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     min: 0.5
     max: 1.5
   highQualitySampling:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   focusDistance:
     m_OverrideState: 0
@@ -78,10 +78,10 @@ MonoBehaviour:
   m_AdvancedMode: 0
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.23104623}
+    m_Value: {x: 0.9138874, y: 0.9269391, z: 1, w: -0.19342352}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0.13079666}
+    m_Value: {x: 1, y: 1, z: 1, w: 0.05504058}
   highlights:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1, z: 1, w: 0}
@@ -122,16 +122,16 @@ MonoBehaviour:
     showAlpha: 0
     showEyeDropper: 1
   center:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 0.15
     min: 0
     max: 1
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.2
+    m_Value: 1
     min: 0.01
     max: 1
   rounded:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 1
     min: 0
   intensity:
     m_OverrideState: 1
@@ -244,7 +244,7 @@ MonoBehaviour:
     m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.2
     min: 0
     max: 1
   clamp:
