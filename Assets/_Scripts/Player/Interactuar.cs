@@ -41,7 +41,7 @@ public class Interactuar : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                coll.transform.parent.parent.GetComponent<Puerta>().Abrir(coll.gameObject);
+                //coll.transform.parent.parent.GetComponent<Puerta>().Abrir(coll.gameObject);
             }
         }
     }

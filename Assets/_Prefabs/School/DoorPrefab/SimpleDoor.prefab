@@ -92,6 +92,9 @@ GameObject:
   - component: {fileID: 8253162295782083819}
   - component: {fileID: 1154544877448682534}
   - component: {fileID: 2707766181187517950}
+  - component: {fileID: 2864964171366627348}
+  - component: {fileID: 4163381499691604742}
+  - component: {fileID: 6482634904721887959}
   m_Layer: 0
   m_Name: SimpleDoor
   m_TagString: Untagged
@@ -161,3 +164,48 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2864964171366627348
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041493231266165412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2735478929033136612, guid: c1a8046456b524b43bc0ecded154d859, type: 3}
+--- !u!65 &4163381499691604742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041493231266165412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02, y: 0.011999998, z: 0.022000002}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6482634904721887959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9041493231266165412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6529137edca5a90468fb66c2fe898e6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _doorA: {fileID: 7483135094370761382}
+  RotationValue: 90
+  RotationNegativeValue: -90
+  timeBetwentAction: 0.1
+  KeyDoor: 0
+  canOpen: 0
